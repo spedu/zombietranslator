@@ -1,16 +1,6 @@
 define([], function() {
   var Translator = function() {};
-  /*
-    ????
-    For the translations, do rules run against the running translated text as they're being applied or always against the original text? 
-    For instance, rule 5 is 'i' or 'I' to 'rrRr' and rule 8 is 'R' to 'RR'. If I pass in the text 'i' to the zombify function would 
-    that result in 'rrRr' or 'rrRRr'?
-
-    Can solve the rule 5 to rule 8 problem by moving rule 8 to after rule 1 below
-
-    ?? OR should one of the made up rules be the previous rules must be applied in order, so they can be unzombified properly
-   */
-
+  
   // 1. lower-case "r" at the end of words replaced with "rh".
   // 2. an "a" or "A" is replaced with "hra".
   // 3. the starts of sentences are capitalised (the "start of a sentence" is any occurrence of
