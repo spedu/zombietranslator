@@ -26,18 +26,8 @@ define([], function() {
   };
 
   Translator.prototype.unzombify = function(text) {
-    /*
-    text = text.replace(/\baRgR/g, 'g');
-    text = text.replace(/LLL/g, 'y');
-    text = text.replace(/RR/g, 'r');
-    text = text.replace(/rrrrRr/g, 'u');
-    text = text.replace(/rrrRr/g, 'o');
-    text = text.replace(/rrRr/g, 'i');
-    text = text.replace(/rr/g, 'e');
-    text = text.replace(/hra/g, 'a');
-    text = text.replace(/rh\b/g, 'r');
+    text = text.replace(/\bLLL/g, 'g');
     text = text.replace(/[.!?] \b\w/g, function(m) { return m.toUpperCase(); });
-    */
     return text;
   };
 
