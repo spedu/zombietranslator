@@ -328,15 +328,127 @@ define(['Translator'], function(Translator) {
       });
       
       describe('rule 8', function() {
-        
+        describe('given a word that contains `r`', function() {
+          it('should replace `r` with `RR`', function() {
+            var text = 'Brass';
+
+            var translatedText = translator.zombify(text);
+
+            expect(translatedText).not.toBeUndefined();
+            expect(translatedText).toBe('BRRhrass');
+            expect(translatedText).toMatch(/RR/);
+          });
+        });
+
+        describe('given a word that just contains `R`', function() {
+          it('should replace the `R` with `RR`', function() {
+            var text = 'R';
+
+            var translatedText = translator.zombify(text);
+
+            expect(translatedText).not.toBeNull();
+            expect(translatedText).toEqual('RR');
+            expect(translatedText).toMatch(/^RR$/);
+          });
+        });
+
+        describe('given a word that contains `R`', function() {
+          it('should replace `R` with `RR`', function() {
+            var text = 'BRass';
+
+            var translatedText = translator.zombify(text);
+
+            expect(translatedText).not.toBeUndefined();
+            expect(translatedText).toBe('BRRhrass');
+            expect(translatedText).toMatch(/RR/);
+          });
+        });
       });
 
       describe('rule 9', function() {
+        describe('given a word that just contains `g`', function() {
+          it('should be replaced by `LLL`', function() {
+            var text = 'g';
 
+            var translatedText = translator.zombify(text);
+
+            expect(translatedText).not.toBeNull();
+            expect(translatedText).toEqual('LLL');
+            expect(translatedText).toMatch(/^LLL$/);
+          });
+        });
+
+        describe('given a word that begins with `g`', function() {
+          it('should be replaced with `LLL`', function() {
+            var text = 'great';
+
+            var translatedText = translator.zombify(text);
+
+            expect(translatedText).not.toBeNull();
+            expect(translatedText).toEqual('LLLRRrrhrat');
+            expect(translatedText).toMatch(/^LLL/);
+          });
+        });
+
+        describe('given a word that contains `g` but is not at the beginning', function() {
+          it('should not be replaced with `LLL`', function() {
+            var text = 'agree';
+
+            var translatedText = translator.zombify(text);
+
+            expect(translatedText).not.toBeNull();
+            expect(translatedText).toBe('hragRRrrrr');
+            expect(translatedText).not.toMatch(/^LLL/);
+          });
+        });
+
+        describe('given a word that just contains `G`', function() {
+          it('should be replaced by `LLL`', function() {
+            var text = 'G';
+
+            var translatedText = translator.zombify(text);
+
+            expect(translatedText).not.toBeNull();
+            expect(translatedText).toEqual('LLL');
+            expect(translatedText).toMatch(/^LLL$/);
+          });
+        });
+
+        describe('given a word that begins with `G`', function() {
+          it('should be replaced with `LLL`', function() {
+            var text = 'Great';
+
+            var translatedText = translator.zombify(text);
+
+            expect(translatedText).not.toBeNull();
+            expect(translatedText).toEqual('LLLRRrrhrat');
+            expect(translatedText).toMatch(/^LLL/);
+          });
+        });
+
+        describe('given a word that contains `G` but is not at the beginning', function() {
+          it('should not be replaced with `LLL`', function() {
+            var text = 'aGree';
+
+            var translatedText = translator.zombify(text);
+
+            expect(translatedText).not.toBeNull();
+            expect(translatedText).toBe('hraGRRrrrr');
+            expect(translatedText).not.toMatch(/^LLL/);
+          });
+        });
       });
 
       describe('rule 10', function() {
+        it('should apply capitalization rule first, then apply other rules', function() {
+          var text = 'this. test! rules?'
 
+          var translatedText = translator.zombify(text);
+
+          expect(translatedText).not.toBeNull();
+          expect(translatedText).toBe('thrrRrs. Trrst! RRrrrrRrlrrs?');
+          expect(translatedText).toMatch(/\bRR/);
+        });
       });
     });
   });
