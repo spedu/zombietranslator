@@ -11,11 +11,12 @@ define(['jquery', 'Translator'], function($, Translator) {
     this.translator = new Translator();
     this.bindEngishToZombieEvents();
     this.bindZombieToEnglishEvents();
-  }
+  };
 
   TranslatorView.prototype.bindEngishToZombieEvents = function() {
-    this.$englishToZombieBtn.on('click', this.zombify.bind(this));
-    this.$english.on("keyup", this.zombify.bind(this));
+    var self = this;
+    this.$englishToZombieBtn.on('click', function(e) { return self.zombify.call(self, [e]); });
+    this.$english.on("keyup", function(e) { return self.zombify.call(self, [e]); }); 
   };
 
   TranslatorView.prototype.zombify = function(event) {
@@ -25,8 +26,9 @@ define(['jquery', 'Translator'], function($, Translator) {
   };
 
   TranslatorView.prototype.bindZombieToEnglishEvents = function() {
-    this.$zombieToEnglishBtn.on('click', this.unzombify.bind(this));
-    this.$zombie.on('keyup', this.unzombify.bind(this));
+    var self = this;
+    this.$zombieToEnglishBtn.on('click', function(e) { return self.unzombify.call(self, [e]) });
+    this.$zombie.on('keyup', function(e) { return self.unzombify.call(self, [e]) });
   };
 
   TranslatorView.prototype.unzombify = function(event) {

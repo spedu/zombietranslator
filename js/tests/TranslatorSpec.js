@@ -7,6 +7,8 @@ define(['Translator'], function(Translator) {
     });
 
     describe('zombify', function() {
+      // TODO write some generic rules to just to exercise the function (use the examples from assignment + some more)
+
       describe('rule 1', function() {
         describe('given a phrase ending with a lowercase `r`', function() {
           it('should be replaced with `rh`', function() {
