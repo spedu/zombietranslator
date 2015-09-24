@@ -1,6 +1,6 @@
 define([], function() {
   var Translator = function() {};
-  
+
   // 1. lower-case "r" at the end of words replaced with "rh".
   // 2. an "a" or "A" is replaced with "hra".
   // 3. the starts of sentences are capitalised (the "start of a sentence" is any occurrence of
@@ -13,7 +13,7 @@ define([], function() {
   // 9. "g" or "G" at beginning of words is replaced by "LLL"
   // 10. Capitalization rule should be done first, and all other rules will apply to the properly capitalized text
   Translator.prototype.zombify = function(text) {
-    text = text.replace(/[.!?] \b\w/g, function(m) { return m.toUpperCase(); }); // rule 3
+    text = text.replace(/[.!?] \b\w/g, function(m) { return m.toUpperCase(); }); // rule 3 and rule 10
     text = text.replace(/r\b/g, 'rh'); // rule 1
     text = text.replace(/(?!(rh$|\brh\b))r/gi, 'RR'); // rule 8
     text = text.replace(/a/gi, 'hra'); // rule 2
