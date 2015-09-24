@@ -7,7 +7,17 @@ define(['Translator'], function(Translator) {
     });
 
     describe('zombify', function() {
-      // TODO write some generic rules to just to exercise the function (use the examples from assignment + some more)
+      it('should translate english to zombie', function() {
+        expect(translator.zombify('something')).not.toBeUndefined();
+        expect(translator.zombify('Terror')).toEqual('TrrRRRRrrrRrrh');
+        expect(translator.zombify('JaZahn')).toBe('JhraZhrahn');
+        expect(translator.zombify('petty')).toBe('prrtty');
+        expect(translator.zombify('pretty')).toMatch('pRRrrtty');
+        expect(translator.zombify('brains')).toBe('bRRhrarrRrns');
+        expect(translator.zombify('onomatopoeia')).toEqual('rrrRrnrrrRrmhratrrrRrprrrRrrrrrRrhra');
+        expect(translator.zombify('Testing my brains out! does it work?')).toEqual('TrrstrrRrng my bRRhrarrRrns rrrRrrrrrRrt! DrrrRrrrs rrRrt wrrrRrRRk?')
+        expect(translator.zombify('testing my brains out! really? does it work?')).toBe('trrstrrRrng my bRRhrarrRrns rrrRrrrrrRrt! RRrrhrally? DrrrRrrrs rrRrt wrrrRrRRk?')
+      });
 
       describe('rule 1', function() {
         describe('given a phrase ending with a lowercase `r`', function() {
