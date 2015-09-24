@@ -350,6 +350,14 @@ define(['Translator'], function(Translator) {
             expect(translatedText).toBe('BRRhrass');
             expect(translatedText).toMatch(/RR/);
           });
+
+          it('should respect word boundaries of the `rh` rule', function() {
+            var text = 'Tester! tester';
+
+            var translatedText = translator.zombify(text);
+
+            expect(translatedText).toBe('Trrstrrrh! Trrstrrrh');
+          });
         });
 
         describe('given a word that just contains `R`', function() {
