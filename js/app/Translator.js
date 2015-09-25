@@ -11,7 +11,8 @@ define([], function() {
   // 7. "u" or "U" is replaced by "rrrrRr"
   // 8. "r" or "R" is replaced by "RR"
   // 9. "g" or "G" at beginning of words is replaced by "LLL"
-  // 10. Capitalization rule should be done first, and all other rules will apply to the properly capitalized text
+  // 10. Capitalization rule should be done first when translating from english to zombie and last when translating from zombie to english, 
+  //        and any other rules will be applied to the properly capitalized text
   Translator.prototype.zombify = function(text) {
     text = text.replace(/[.!?] \b\w/g, function(m) { return m.toUpperCase(); }); // rule 3 and rule 10
     text = text.replace(/r\b/g, 'rh'); // rule 1
@@ -34,7 +35,6 @@ define([], function() {
     text = text.replace(/rr/g, 'e');
     text = text.replace(/rh\b/g, 'r');
     text = text.replace(/RR/g, 'r');
-
     text = text.replace(/[.!?] \b\w/g, function(m) { return m.toUpperCase(); });
     return text;
   };

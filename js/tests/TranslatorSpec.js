@@ -472,4 +472,284 @@ define(['Translator'], function(Translator) {
       });
     });
   });
+
+  describe('unzombify', function() {
+    it('should translate zombie to english', function() {
+      expect(translator.unzombify('TrrRRRRrrrRrrh')).toBe('Terror');
+      expect(translator.unzombify('JhraZhrahn')).toBe('JaZahn');
+      expect(translator.unzombify('prrtty')).toBe('petty');
+      expect(translator.unzombify('pRRrrtty')).toBe('pretty');
+      expect(translator.unzombify('bRRhrarrRrns')).toBe('brains');
+    });
+
+    describe('rule 1', function() {
+      describe('given a phrase with words that end in `rh`', function() {
+        it('should translate back to `r`', function() {
+          var text = 'Trrstrrrh';
+
+          var translatedText = translator.unzombify(text);
+
+          expect(translatedText).not.toBeUndefined();
+          expect(translatedText).toMatch(/r$/);
+          expect(translatedText).toBe('Tester');
+        });
+      });
+    });
+
+    describe('rule 2', function() {
+      describe('given a phrase that just contains `hra`', function() {
+        it('should translate back to `a`', function() {
+          var text = 'hra';
+
+          var translatedText = translator.unzombify(text);
+
+          expect(translatedText).not.toBeUndefined()
+          expect(translatedText).not.toBeNull();
+          expect(translatedText).toEqual('a');
+        });
+      });
+
+      describe('given a word that contains `hra`', function() {
+        it('should translate back to `a`', function() {
+          var text = 'Chrat';
+
+          var translatedText = translator.unzombify(text);
+
+          expect(translatedText).not.toBeUndefined();
+          expect(translatedText).toEqual('Cat');
+          expect(translatedText).toMatch(/a/);
+        });
+      });
+    });
+
+    describe('rule 3', function() {
+      describe('given a character followed by a `.`', function() {
+        describe('when it is a translated character', function() {
+          it('should capitalize that character', function() {
+            var text = 'Trrst. LLLRRrrhrat';
+
+            var translatedText = translator.unzombify(text);
+
+            expect(translatedText).not.toBeUndefined();
+            expect(translatedText).toBe('Test. Great');
+          });
+        });
+
+        describe('when it is a non-translatable character', function() {
+          it('should capitalize that character', function() {
+            var text = 'Trrst. trrst';
+
+            var translatedText = translator.unzombify(text);
+
+            expect(translatedText).not.toBeUndefined();
+            expect(translatedText).toBe('Test. Test');
+          });
+        });
+      });
+
+      describe('given a character followed by a `!`', function() {
+        describe('when it is a translated character', function() {
+          it('should capitalize that character', function() {
+            var text = 'Trrst! LLLRRrrhrat';
+
+            var translatedText = translator.unzombify(text);
+
+            expect(translatedText).not.toBeUndefined();
+            expect(translatedText).toBe('Test! Great');
+          });
+        });
+
+        describe('when it is a non-translatable character', function() {
+          it('should capitalize that character', function() {
+            var text = 'Trrst! trrst';
+
+            var translatedText = translator.unzombify(text);
+
+            expect(translatedText).not.toBeUndefined();
+            expect(translatedText).toBe('Test! Test');
+          });
+        });
+      });
+
+      describe('given a character followed by a `?`', function() {
+        describe('when it is a translated character', function() {
+          it('should capitalize that character', function() {
+            var text = 'Trrst? LLLRRrrhrat';
+
+            var translatedText = translator.unzombify(text);
+
+            expect(translatedText).not.toBeUndefined();
+            expect(translatedText).toBe('Test? Great');
+          });
+        });
+
+        describe('when it is a non-translatable character', function() {
+          it('should capitalize that character', function() {
+            var text = 'Trrst? trrst';
+
+            var translatedText = translator.unzombify(text);
+
+            expect(translatedText).not.toBeUndefined();
+            expect(translatedText).toBe('Test? Test');
+          });
+        });
+      });
+    });
+
+    describe('rule 4', function() {
+      describe('when `rr` is on its own', function() {
+        it('should replace `rr` with `e`', function() {
+          var text = 'rr';
+
+          var translatedText = translator.unzombify(text);
+
+          expect(translatedText).not.toBeUndefined();
+          expect(translatedText).toBe('e');
+        });
+      });
+
+      describe('when `rr` is within a word', function() {
+        it('should replace `rr` with `e`', function() {
+          var text = 'Trrstrrrh';
+
+          var translatedText = translator.unzombify(text);
+
+          expect(translatedText).not.toBeUndefined();
+          expect(translatedText).toBe('Tester');
+        });
+      });
+    });
+
+    describe('rule 5', function() {
+      describe('when `rrRr` is on its on', function() {
+        it('should replace `rrRr` with `i`', function() {
+          var text = 'rrRr';
+
+          var translatedText = translator.unzombify(text);
+
+          expect(translatedText).not.toBeUndefined();
+          expect(translatedText).toBe('i');
+        });
+      });
+
+      describe('when `rrRr` is contained within a word', function() {
+        it('should replace `rrRr` with `i`', function() {
+          var text = 'BrrRrts';
+
+          var translatedText = translator.unzombify(text);
+
+          expect(translatedText).not.toBeUndefined();
+          expect(translatedText).toBe('Bits');
+        });
+      });
+    });
+
+    describe('rule 6', function() {
+      describe('when `rrrRr` is on its own', function() {
+        it('should replace `rrrRr` with `o`', function() {
+          var text = 'rrrRr';
+
+          var translatedText = translator.unzombify(text);
+
+          expect(translatedText).not.toBeUndefined();
+          expect(translatedText).toBe('o');
+        });
+      });
+
+      describe('when `rrrRr` is within a word', function() {
+        it('should replace `rrrRr` with `o`', function() {
+          var text = 'brrrRrts';
+
+          var translatedText = translator.unzombify(text);
+
+          expect(translatedText).not.toBeUndefined();
+          expect(translatedText).toBe('bots');
+        });
+      });
+    });
+
+    describe('rule 7', function() {
+      describe('when `rrrrRr` is on its own', function() {
+        it('should replace `rrrrRr` with `u`', function() {
+          var text = 'rrrrRr';
+
+          var translatedText = translator.unzombify(text);
+
+          expect(translatedText).not.toBeUndefined();
+          expect(translatedText).toBe('u');
+        });
+      });
+
+      describe('when `rrrrRr` is within a word', function() {
+        it('should replace `rrrrRr` with `u`', function() {
+          var text = 'brrrrRrts';
+
+          var translatedText = translator.unzombify(text);
+
+          expect(translatedText).not.toBeUndefined();
+          expect(translatedText).toBe('buts');
+        });
+      });
+    });
+
+    describe('rule 8', function() {
+      describe('when `RR` is on its own', function() {
+        it('should replace `RR` with `r`', function() {
+          var text = 'RR';
+
+          var translatedText = translator.unzombify(text);
+
+          expect(translatedText).not.toBeUndefined();
+          expect(translatedText).toBe('r');
+        });
+      });
+
+      describe('when `RR` is within a word', function() {
+        it('should replace `RR` with `r`', function() {
+          var text = 'LLLRRrrhrat';
+
+          var translatedText = translator.unzombify(text);
+
+          expect(translatedText).not.toBeUndefined();
+          expect(translatedText).toBe('great');
+        });
+      });
+    });
+
+    describe('rule 9', function() {
+      describe('when `LLL` is on its own', function() {
+        it('should replace `LLL` with `g`', function() {
+          var text = 'LLL';
+
+          var translatedText = translator.unzombify(text);
+
+          expect(translatedText).not.toBeUndefined();
+          expect(translatedText).toBe('g');
+        });
+      });
+
+      describe('when `LLL` is within a word', function() {
+        it('should replace `LLL` with `g`', function() {
+          var text = 'LLLRRrrhrat';
+
+          var translatedText = translator.unzombify(text);
+
+          expect(translatedText).not.toBeUndefined();
+          expect(translatedText).toBe('great');
+          expect(translatedText).toMatch(/^g/); 
+        });
+      });
+
+      describe('when `LLL` is not at the beginning of a word', function() {
+        it('should not translate `LLL` to english', function() {
+          var text = 'chLLLt';
+
+          var translatedText = translator.unzombify(text);
+
+          expect(translatedText).not.toBeUndefined();
+          expect(translatedText).toBe('chLLLt');
+        });
+      });
+    });
+  });
 });

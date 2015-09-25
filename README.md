@@ -12,4 +12,7 @@ Rules:
 7. "u" or "U" is replaced by "rrrrRr".
 8. "r" or "R" is replaced by "RR"
 9. "g" or "G" at beginning of words is replaced by "LLL"
-10. Capitalization rule should be done first, and all other rules will apply to the properly capitalized text
+10. Capitalization rule should be done first when translating from english to zombie and last when translating from zombie to english, and any other rules will be applied to the properly capitalized text
+
+## Known issues
+* Unzombify is best effort. Sometime can get confused with phrases that translate back to `ei`.
