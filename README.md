@@ -14,5 +14,16 @@ Rules:
 9. "g" or "G" at beginning of words is replaced by "LLL"
 10. Capitalization rule should be done first when translating from english to zombie and last when translating from zombie to english, and any other rules will be applied to the properly capitalized text
 
+# Expects used
+
+All expects used within `TranslatorSpec`
+
+* not.toBeNull
+* not.toBeUndefined
+* toMatch
+* toBe
+* toEqual
+
 ## Known issues
+
 * Unzombify is best effort. Sometime can get confused with phrases that translate back to `ei`.
