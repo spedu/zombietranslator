@@ -32,5 +32,27 @@ define(['jquery', 'TranslatorView'], function($, TranslatorView) {
         expect(translatorView.$zombie.val()).toBe('Trrst');
       });
     });
+
+    describe('keyup on zombie input', function() {
+      it('should output the translated text to the zombie textarea', function() {
+        expect(translatorView.$english.val()).toBe('');
+
+        translatorView.$zombie.val('Trrst');
+        translatorView.$zombie.trigger('keyup');
+
+        expect(translatorView.$english.val()).toBe('Test');
+      });
+    });
+
+    describe('clicking the zombie to english button', function() {
+      it('should output the translated text to the english textarea', function() {
+        expect(translatorView.$english.val()).toBe('');
+
+        translatorView.$zombie.val('Trrst');
+        translatorView.$zombieToEnglishBtn.trigger('click');
+
+        expect(translatorView.$english.val()).toBe('Test');
+      });
+    });
   });
 });
