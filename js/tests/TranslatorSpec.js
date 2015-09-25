@@ -55,6 +55,7 @@ define(['Translator'], function(Translator) {
 
             expect(translatedText).not.toBeUndefined();
             expect(translatedText).toBe(expectedTranslatedText);
+            expect(translatedText).toMatch(/hra/);
           });
         });
         
@@ -67,6 +68,7 @@ define(['Translator'], function(Translator) {
 
             expect(translatedText).not.toBeUndefined();
             expect(translatedText).toBe(expectedTranslatedText);
+            expect(translatedText).toMatch(/hra/);
           });
         });
         
